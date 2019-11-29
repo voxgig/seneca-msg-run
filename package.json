@@ -1,0 +1,55 @@
+{
+  "name": "@seneca/msg-run",
+  "version": "0.1.0",
+  "description": "",
+  "main": "msg-run.js",
+  "scripts": {
+    "watch": "tsc -w -d",
+    "build": "tsc -d",
+    "test": "lab -v -L -P test -t 50 --sourcemaps --transform node_modules/lab-transform-typescript",
+    "doc": "seneca-doc",
+    "prettier": "prettier --write *.js lib/*.js bin/*.js test/*.js",
+    "coveralls": "lab -s -P test -r lcov | coveralls",
+    "clean": "rm -rf node_modules package-lock.json yarn.lock",
+    "reset": "npm run clean && npm i && npm test",
+    "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
+    "repo-publish": "npm run clean-npm && npm i --registry http://registry.npmjs.org && npm run prettier && npm test && npm run doc && npm run repo-tag && npm publish --access public --registry http://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig/seneca-msg-run.git"
+  },
+  "files": [
+    "LICENSE",
+    "README.txt",
+    "msg-run.js",
+    "msg-run-docs.js",
+    "dest"
+  ],
+  "keywords": [
+    "seneca"
+  ],
+  "author": "Richard Rodger richardrodger.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voxgig/seneca-msg-run/issues"
+  },
+  "homepage": "https://github.com/voxgig/seneca-msg-run#readme",
+  "dependencies": {
+    "xstate": "^4.6.7"
+  },
+  "devDependencies": {
+    "@hapi/code": "^7.0.0",
+    "@hapi/lab": "^21.0.0",
+    "@types/node": "^12.11.7",
+    "coveralls": "^3.0.7",
+    "lab-transform-typescript": "^3.0.1",
+    "lolex": "^5.1.1",
+    "prettier": "^1.18.2",
+    "seneca": "plugin",
+    "seneca-doc": "^1.4.0",
+    "seneca-plugin-validator": "^0.3.0",
+    "seneca-promisify": "^1.1.0",
+    "typescript": "^3.6.4"
+  }
+}
