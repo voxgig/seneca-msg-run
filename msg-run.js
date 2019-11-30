@@ -25,7 +25,7 @@ function msg_run(options) {
   var seneca = this
 
   const clock = intern.make_clock(options)
-  
+
   const machine = intern.make_scenario_machine(options.spec, intern.validate)
 
   const pi = {
