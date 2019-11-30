@@ -9,18 +9,15 @@ const XState = require('xstate')
 module.exports = msg_run
 module.exports.defaults = {
   test: Joi.boolean().default(true),
-  clock: Joi.object(),
   spec: Joi.object({
-    interval: Joi.number().default(111),
+    interval: Joi.number().default(111111),
     tests: Joi.array()
       .items({
         name: Joi.string().required(),
-        scenario: Joi.array()
+        scenario: Joi.array().default([])
       })
       .required()
-  })
-    .default()
-    .required()
+  }).default()
 }
 module.exports.errors = {}
 
@@ -28,7 +25,7 @@ function msg_run(options) {
   var seneca = this
 
   const clock = intern.make_clock(options)
-
+  
   const machine = intern.make_scenario_machine(options.spec, intern.validate)
 
   const pi = {
@@ -47,6 +44,8 @@ function msg_run(options) {
   }
 
   seneca
+    .message('sys:msg-run,set:spec', set_spec)
+    .message('sys:msg-run,get:spec', get_spec)
     .message('sys:msg-run,cmd:start', cmd_start)
     .message('sys:msg-run,cmd:stop', cmd_stop)
     .message('sys:msg-run,get:previous', get_previous)
@@ -55,6 +54,15 @@ function msg_run(options) {
     .message('sys:msg-run,get:history', get_history)
 
   // .prepare(async function prepare_msg_run() {})
+
+  async function set_spec(msg) {
+    pi.spec = msg.spec
+    return { ok: true }
+  }
+
+  async function get_spec(msg) {
+    return pi.spec
+  }
 
   async function cmd_start(msg) {
     var run_seneca = this.root.delegate()
