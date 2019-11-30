@@ -9,6 +9,7 @@ module.exports = {
   },
   rules: {
     'no-console': 0,
-    'no-unused-vars': [2,{args:'none'}]
+    'no-unused-vars': [2,{args:'none'}],
+    'require-atomic-updates': 0
   }
 }

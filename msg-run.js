@@ -4,12 +4,21 @@
 
 const Util = require('util')
 
+const Joi = require('@hapi/joi')
 const XState = require('xstate')
 
 
 module.exports = msg_run
 module.exports.defaults = {
-  dest: []
+  test: Joi.boolean().default(true),
+  clock: Joi.object(),
+  spec: Joi.object({
+    interval: Joi.number().default(111),
+    tests: Joi.array().items({
+      name: Joi.string().required(),
+      scenario: Joi.array(),
+    }).required()
+  }).default().required()
 }
 module.exports.errors = {}
 
@@ -21,7 +30,7 @@ function msg_run(options) {
   
   const machine = intern.make_scenario_machine(options.spec, intern.validate)
   
-  const ctx = {
+  const pi = {
     spec: options.spec,
     previous: {},
     current: {},
@@ -34,7 +43,6 @@ function msg_run(options) {
 
     // TODO: save as entity
     store: [],
-
   }
   
   
@@ -49,27 +57,28 @@ function msg_run(options) {
     // .prepare(async function prepare_msg_run() {})
 
   async function cmd_start(msg) {
-    return this.util.deep(intern.start(this, clock, msg, ctx, machine))
+    var run_seneca = this.root.delegate()
+    return this.util.deep(intern.start(run_seneca, clock, msg, pi, machine))
   }
 
   async function cmd_stop(msg) {
-    return this.util.deep(intern.stop(msg, ctx))
+    return this.util.deep(intern.stop(msg, pi))
   }
 
   async function get_previous(msg) {
-    return intern.get_test_results(msg, ctx.previous)
+    return intern.get_test_results(msg, pi.previous)
   }
 
   async function get_current(msg) {
-    return intern.get_test_results(msg, ctx.current)
+    return intern.get_test_results(msg, pi.current)
   }
 
   async function get_status(msg) {
-    var current_test = ctx.status.current_test
+    var current_test = pi.status.current_test
     if(current_test.start) {
       current_test.elapsed = Date.now() - current_test.start
     }
-    return this.util.deep(ctx.status)
+    return this.util.deep(pi.status)
   }
 
   async function get_history(msg) {
@@ -79,19 +88,27 @@ function msg_run(options) {
     }
     
     if(msg.full) {
-      history.store = ctx.store
+      history.store = pi.store
     }
 
     // summary table
     else {
       var table = []
-      for(var i = ctx.store.length-1; ctx.store.length-10 < i && -1 < i; --i) {
-        var run = ctx.store[i]
+      for(var i = pi.store.length-1; pi.store.length-10 < i && -1 < i; --i) {
+        var run = pi.store[i]
         var passed = 0
         var failed = 0
-
+        var fail_names = []
+        
         for(var tI = 0; tI < run.tests.length; tI++) {
-          passed++
+          var test = run.tests[tI]
+          if(test.pass) {
+            passed++
+          }
+          else {
+            failed++
+            fail_names.push(test.name)
+          }
         }
         
         var row = [
@@ -99,7 +116,9 @@ function msg_run(options) {
           run.run,
           run.duration,
           passed,
-          failed
+          failed,
+          0 < failed ? 'F' : 'P',
+          fail_names.join(',')
         ]
 
         table.push(row)
@@ -115,99 +134,104 @@ function msg_run(options) {
 
 const intern = (msg_run.intern = {
   validate: function(ctx) {
-    return true
+    var scenario_step = ctx.test_spec.scenario[ctx.index]
+
+    var match = scenario_step.out
+    var actual = ctx.res.out
+
+    var check = ctx.seneca().util.Optioner(match, {must_match_literals: true})
+    var result = check(actual)
+    
+    //var pass = JSON.stringify(match) === JSON.stringify(actual)
+    
+    return null == result.error
   },
 
   execute_test: async function(seneca, test_spec, machine) {
-    var machine_context = {
-      seneca: () => seneca,
-      test_spec: test_spec,
-      index: 0,
-      results: []
-    }
-
-    const interpreter =
-          intern.make_scenario_interpreter(machine, machine_context)
-    
     return new Promise(resolve=>{
-      interpreter.onDone(function() {
-        var final_context = {
-          test_spec: test_spec,
-          results: machine_context.results
-        }
-        resolve(final_context)
-      })
 
+      var machine_context = {
+        seneca: () => seneca,
+        finish: (ctx) => resolve(ctx), 
+        test_spec: test_spec,
+        index: 0,
+        results: [],
+      }
+
+      const interpreter =
+            intern.make_scenario_interpreter(machine, machine_context)
+    
       interpreter.start()
     })
   },
 
-  runner: function(seneca, clock, msg, ctx, machine) {
-    if(ctx.status.running) return ctx.status;
+  runner: function(seneca, clock, msg, pi, machine) {
+    if(pi.status.running) return pi.status;
     
-    ctx.status.running = true
+    pi.status.running = true
     run_tests()
 
-    return ctx.status;
+    return pi.status;
     
     async function run_tests() {
-      if(!ctx.status.running) return;
+      if(!pi.status.running) return;
 
-      ctx.previous = ctx.current
+      pi.previous = pi.current
 
-      ctx.current = {
+      pi.current = {
         start: Date.now(),
         tests: [],
       }
       
-      var tests = ctx.spec.tests
+      var tests = pi.spec.tests
       
       for(var tI = 0; tI < tests.length; tI++) {
-        if(!ctx.status.running) {
+        if(!pi.status.running) {
           break
         }
         
         var test_spec = tests[tI]
         var test_start = Date.now()
 
-        ctx.status.current_test.name = test_spec.name
-        ctx.status.current_test.start = test_start
+        pi.status.current_test.name = test_spec.name
+        pi.status.current_test.start = test_start
 
         var test_result = await intern.execute_test(seneca, test_spec, machine)
+        // console.log('TR', test_result)
         
-        ctx.status.current_test.name = null
-        ctx.status.current_test.start = null
-        ctx.status.current_test.elapsed = null
+        pi.status.current_test.name = null
+        pi.status.current_test.start = null
+        pi.status.current_test.elapsed = null
         
         test_result.name = test_spec.name
         test_result.start = test_start
         test_result.end = Date.now()
         test_result.duration = test_result.end - test_start
 
-        ctx.current.tests.push(test_result)
+        pi.current.tests.push(test_result)
       }
 
-      ctx.current.run = ctx.status.runs
-      ctx.current.end = Date.now()
-      ctx.current.duration = ctx.current.end - ctx.current.start
+      pi.current.run = pi.status.runs
+      pi.current.end = Date.now()
+      pi.current.duration = pi.current.end - pi.current.start
 
-      //console.log('ALL END', ctx)
-      intern.store(ctx)
+      //console.log('ALL END', pi)
+      intern.store(pi)
 
-      ctx.status.runs++
+      pi.status.runs++
       
-      if(ctx.status.running) {
-        clock.setTimeout(run_tests, ctx.spec.interval)
+      if(pi.status.running) {
+        clock.setTimeout(run_tests, pi.spec.interval)
       }
     }
   },
-  start: function(seneca, clock, msg, ctx, machine) {
-    return intern.runner(seneca, clock, msg, ctx, machine)
+  start: function(seneca, clock, msg, pi, machine) {
+    return intern.runner(seneca, clock, msg, pi, machine)
   },
 
-  stop: function(msg,ctx) {
-    ctx.status.running = false
-    return ctx.status
+  stop: function(msg,pi) {
+    pi.status.running = false
+    return pi.status
   },
   
   get_test_results: function (msg, src) {
@@ -229,10 +253,10 @@ const intern = (msg_run.intern = {
     return out
   },
 
-  store: function(ctx) {
-    if(ctx.current.start) {
-      var stored_test = {...ctx.current}
-      ctx.store.push(stored_test)
+  store: function(pi) {
+    if(pi.current.start) {
+      var stored_test = {...pi.current}
+      pi.store.push(stored_test)
     }
   },
 
@@ -273,16 +297,11 @@ const intern = (msg_run.intern = {
         }
       },
       guards: {
-        result_validate: (ctx,event) => {
-          var pass = true // 4 == event.data.x
-          return pass
-        },
         result_is_invalid: (ctx) => {
           return !ctx.valid
         },
         result_has_more_msgs: (ctx) => {
-          var pass = ctx.index < (ctx.test_spec.scenario.length-1)
-          return pass
+          return ctx.index < (ctx.test_spec.scenario.length-1)
         }
       }
     }
@@ -332,11 +351,20 @@ const intern = (msg_run.intern = {
         },
         
         pass: {
-          type: 'final'
+          entry: XState.assign({pass:true}),
+          on: { '': 'stop' }
         },
         
         fail: {
-          type: 'final'
+          entry: XState.assign({pass:false}),
+          on: { '': 'stop' }
+        },
+
+        stop: {
+          entry: (ctx) => {
+            ctx.finish(ctx)
+          },
+          type: 'final',
         }
         
       }
@@ -347,20 +375,23 @@ const intern = (msg_run.intern = {
   },
 
   make_scenario_interpreter: function(machine, ctx) {
+    ctx.mark = Math.random()
     const machine_instance = machine.withContext(ctx)
 
     const interpreter = XState
           .interpret(machine_instance)
           .onTransition(state => {
+            /*
             console.log(intern.aligner([
               0, 'TRANSITION',
-              16, state.value,
-              16, state.event.type,
+              12, state.value,
+              20, state.event.type,
               8, state.context.test_spec.name,
               0, state.context.msg,
               0, state.context.res && state.context.res.out,
               0, state.context.index
             ]))
+            */
           })
     
     return interpreter
