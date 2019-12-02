@@ -57,6 +57,7 @@ function msg_run(options) {
 
   // .prepare(async function prepare_msg_run() {})
 
+  // TODO: validate spec
   async function set_spec(msg) {
     pi.spec = msg.spec
     return { ok: true }
@@ -184,6 +185,16 @@ function msg_run(options) {
 const intern = (msg_run.intern = {
   validate: function(ctx) {
     var scenario_step = ctx.test_spec.scenario[ctx.index]
+
+    // unexpected error
+    if (ctx.res.err && scenario_step.out) {
+      return false
+    }
+
+    // unexpected output (when it should have been an expected error)
+    if (ctx.res.out && scenario_step.err) {
+      return false
+    }
 
     var match = scenario_step.err || scenario_step.out
     var actual = ctx.res.err || ctx.res.out
