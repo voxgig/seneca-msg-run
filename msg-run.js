@@ -1,7 +1,7 @@
 /* Copyright (c) 2019 voxgig and other contributors, MIT License */
 'use strict'
 
-const Util = require('util')
+// const Util = require('util')
 
 const Joi = require('@hapi/joi')
 const XState = require('xstate')
@@ -10,6 +10,7 @@ module.exports = msg_run
 module.exports.defaults = {
   test: Joi.boolean().default(true),
   spec: Joi.object({
+    name: Joi.string().required(),
     interval: Joi.number().default(111111),
     tests: Joi.array()
       .items({
@@ -52,6 +53,7 @@ function msg_run(options) {
     .message('sys:msg-run,get:current', get_current)
     .message('sys:msg-run,get:status', get_status)
     .message('sys:msg-run,get:history', get_history)
+    .message('sys:msg-run,get:store', get_store)
 
   // .prepare(async function prepare_msg_run() {})
 
@@ -90,6 +92,43 @@ function msg_run(options) {
   }
 
   async function get_history(msg) {
+    var seneca = this
+    var limit = msg.limit || 11
+    //var table = !!msg.table
+    var run_id = msg.run_id
+    var as_data = !!msg.as_data
+    var out = {}
+
+    if (null == run_id) {
+      var msgrunlist = await seneca
+        .entity('sys/msgrun')
+        .list$({ limit$: limit })
+
+      if (as_data) {
+        msgrunlist = msgrunlist.map(x => x.data$())
+      }
+
+      out.runs = msgrunlist
+    } else {
+      var msgrun = await seneca.entity('sys/msgrun').load$(msg.run_id)
+      if (msgrun) {
+        out.run = msgrun
+        var msgrunentrylist = await seneca
+          .entity('sys/msgrunentry')
+          .list$({ msgrun_id: msgrun.id })
+
+        if (as_data) {
+          msgrunentrylist = msgrunentrylist.map(x => x.data$())
+        }
+
+        out.entries = msgrunentrylist
+      }
+    }
+
+    return out
+  }
+
+  async function get_store(msg) {
     var history = {
       // TODO: move get_status to intern pure function
       status: await get_status.call(this, msg)
@@ -146,15 +185,25 @@ const intern = (msg_run.intern = {
   validate: function(ctx) {
     var scenario_step = ctx.test_spec.scenario[ctx.index]
 
-    var match = scenario_step.out
-    var actual = ctx.res.out
+    var match = scenario_step.err || scenario_step.out
+    var actual = ctx.res.err || ctx.res.out
 
-    var check = ctx.seneca().util.Optioner(match, { must_match_literals: true })
-    var result = check(actual)
+    if (null == match && null == actual) {
+      return true
+    }
 
-    //var pass = JSON.stringify(match) === JSON.stringify(actual)
+    // cache optioner
+    var check = scenario_step.check && scenario_step.check()
 
-    return null == result.error
+    if (!check) {
+      check = ctx.seneca().util.Optioner(match, { must_match_literals: true })
+      scenario_step.check = () => check
+    }
+
+    ctx.match = match
+    ctx.check = check(actual)
+
+    return null == ctx.check.error
   },
 
   execute_test: async function(seneca, test_spec, machine) {
@@ -227,7 +276,7 @@ const intern = (msg_run.intern = {
       pi.current.duration = pi.current.end - pi.current.start
 
       //console.log('ALL END', pi)
-      intern.store(pi)
+      await intern.store(seneca, pi)
 
       pi.status.runs++
 
@@ -246,8 +295,6 @@ const intern = (msg_run.intern = {
   },
 
   get_test_results: function(msg, src) {
-    var include_log = !!msg.log
-
     var out = {
       run: src.run,
       start: src.start,
@@ -256,18 +303,88 @@ const intern = (msg_run.intern = {
       tests: src.tests
     }
 
-    // include msg and response data
-    if (include_log) {
-      out.log = src.log
-    }
-
     return out
   },
 
-  store: function(pi) {
+  store: async function(seneca, pi) {
     if (pi.current.start) {
       var stored_test = { ...pi.current }
       pi.store.push(stored_test)
+
+      // prune
+      if (11 < pi.store.length) {
+        pi.store.unshift()
+      }
+
+      var run = pi.current
+      //console.dir(run, {depth:9})
+
+      var passed = 0
+      var failed = 0
+      var fail_names = []
+      var entries = []
+      for (var tI = 0; tI < run.tests.length; tI++) {
+        var test = run.tests[tI]
+        if (test.pass) {
+          passed++
+        } else {
+          failed++
+          fail_names.push(test.name)
+        }
+
+        for (var rI = 0; rI < test.results.length; rI++) {
+          var res = test.results[rI].res
+          var entry = {
+            run_name: pi.spec.name,
+            test_name: test.test_spec.name,
+            pattern: res.pattern,
+            start: res.start,
+            end: res.end,
+            duration: res.duration,
+            kind: res.kind,
+            seq: rI,
+            pass: res.pass
+          }
+
+          if (!entry.pass) {
+            entry.details = {
+              msg: res.msg,
+              out: res.out,
+              err: res.err,
+              match: res.match,
+              check: res.check
+            }
+          }
+
+          entries.push(entry)
+        }
+      }
+
+      var msgrundata = {
+        name: pi.spec.name,
+        start: run.start,
+        duration: run.duration,
+        passed: passed,
+        failed: failed,
+        status: 0 < failed ? 'F' : 'P',
+        fail_names: fail_names.join(',')
+      }
+
+      var msgrun = await seneca
+        .entity('sys/msgrun')
+        .data$(msgrundata)
+        .save$()
+      //console.log(msgrun.data$())
+
+      for (var eI = 0; eI < entries.length; eI++) {
+        entry = entries[eI]
+        entry.msgrun_id = msgrun.id
+        await seneca
+          .entity('sys/msgrunentry')
+          .data$(entry)
+          .save$()
+        //console.log(msgrunentry.data$())
+      }
     }
   },
 
@@ -275,12 +392,36 @@ const intern = (msg_run.intern = {
     const config = {
       actions: {
         update_res: XState.assign({
-          res: (ctx, event) => ({ kind: 'out', msg: ctx.msg, out: event.data })
+          res: (ctx, event) => {
+            // console.log('UPDATE_RES', ctx.msg)
+
+            var msg_end = Date.now()
+            var res = {
+              msg: ctx.msg,
+              start: ctx.msg_start,
+              end: msg_end,
+              duration: msg_end - ctx.msg_start,
+              pattern: ctx.msg_pattern
+            }
+
+            if (event.data instanceof Error) {
+              res.kind = 'err'
+              res.err = event.data
+            } else {
+              res.kind = 'out'
+              res.out = event.data
+            }
+
+            return res
+          }
         }),
 
         validate_res: XState.assign({
           valid: ctx => {
-            return validate(ctx)
+            // console.log('VALIDATE_RES', ctx.msg)
+            var pass = validate(ctx)
+            ctx.res.pass = pass
+            return pass
           }
         }),
 
@@ -299,10 +440,12 @@ const intern = (msg_run.intern = {
           // TODO: pre process this
           var msgparts = ctx.test_spec.scenario[index].msg
           msgparts = Array.isArray(msgparts) ? msgparts : [msgparts]
+          ctx.msg_pattern = ctx.seneca().util.Jsonic.stringify(msgparts[0])
           msgparts.unshift({})
           msgparts = msgparts.map(x => ctx.seneca().util.Jsonic(x))
 
           ctx.msg = ctx.seneca().util.deep.apply(null, msgparts)
+          ctx.msg_start = Date.now()
           return ctx.seneca().post(ctx.msg)
         }
       },
@@ -330,7 +473,8 @@ const intern = (msg_run.intern = {
                 actions: ['update_res', 'validate_res']
               },
               onError: {
-                target: 'result'
+                target: 'result',
+                actions: ['update_res', 'validate_res']
               }
             }
           },
@@ -417,8 +561,9 @@ const intern = (msg_run.intern = {
     }
 
     return clock
-  },
+  }
 
+  /*
   aligner: function(line) {
     var out = []
     for (var i = 0; i < line.length; i += 2) {
@@ -437,4 +582,5 @@ const intern = (msg_run.intern = {
     }
     return out.join('')
   }
+  */
 })

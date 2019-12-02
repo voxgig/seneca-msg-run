@@ -1,12 +1,12 @@
 {
   "name": "@seneca/msg-run",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "msg-run.js",
   "scripts": {
     "watch": "tsc -w -d",
     "build": "tsc -d",
-    "test": "lab -v -L -P test -t 50 --sourcemaps --transform node_modules/lab-transform-typescript",
+    "test": "lab -v -L -P test -t 50 --sourcemaps --transform node_modules/lab-transform-typescript -r console -o stdout -r html -o test/coverage.html",
     "doc": "seneca-doc",
     "prettier": "prettier --write *.js lib/*.js bin/*.js test/*.js",
     "coveralls": "lab -s -P test -r lcov | coveralls",
@@ -48,6 +48,7 @@
     "prettier": "^1.19.1",
     "seneca": "plugin",
     "seneca-doc": "^1.4.0",
+    "seneca-entity": "^5.2.0",
     "seneca-plugin-validator": "^0.4.0",
     "seneca-promisify": "^1.1.0",
     "typescript": "^3.7.2"

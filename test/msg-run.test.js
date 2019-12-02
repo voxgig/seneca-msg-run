@@ -16,8 +16,9 @@ const Plugin = require('..')
 
 lab.test('validate', PluginValidator(Plugin, module))
 
-lab.test('happy', { timeout: 3333 }, async () => {
+lab.test('happy', { timeout: 5555 }, async () => {
   var spec = {
+    name: 'happy',
     interval: 100,
     tests: [
       {
@@ -103,23 +104,23 @@ lab.test('happy', { timeout: 3333 }, async () => {
   expect(current1.tests[0].results.length).equal(1)
   expect(current1.tests[1].results.length).equal(3)
 
-  var history0 = await si.post('sys:msg-run,get:history,full:true')
-  //console.log('HISTORY')
-  //console.dir(history,{depth:6})
-  expect(history0.store.length).equal(1)
+  var store0 = await si.post('sys:msg-run,get:store,full:true')
+  //console.log('STORE')
+  //console.dir(store,{depth:6})
+  expect(store0.store.length).equal(1)
 
-  var history1 = await si.post('sys:msg-run,get:history')
-  //console.log('HISTORY SUMMARY')
-  //console.dir(history1)
-  expect(history1.summary.length).equal(1)
+  var store1 = await si.post('sys:msg-run,get:store')
+  //console.log('STORE SUMMARY')
+  //console.dir(store1)
+  expect(store1.summary.length).equal(1)
 
   clock.tick(100)
   await si.ready()
 
-  var history2 = await si.post('sys:msg-run,get:history')
-  //console.log('HISTORY SUMMARY')
-  //console.dir(history2)
-  expect(history2.summary.length).equal(2)
+  var store2 = await si.post('sys:msg-run,get:store')
+  //console.log('STORE SUMMARY')
+  //console.dir(store2)
+  expect(store2.summary.length).equal(2)
 
   var status2 = await si.post('sys:msg-run,get:status')
   //console.log('status2', status2)
@@ -170,14 +171,28 @@ lab.test('happy', { timeout: 3333 }, async () => {
   expect(previous2.tests[0].results.length).equal(1)
   expect(previous2.tests[1].results.length).equal(3)
 
-  var history3 = await si.post('sys:msg-run,get:history')
-  //console.log('HISTORY')
-  //console.dir(history3)
-  expect(history3.summary.length).equal(3)
+  var store3 = await si.post('sys:msg-run,get:store')
+  //console.log('STORE')
+  //console.dir(store3)
+  expect(store3.summary.length).equal(3)
+
+  var history0 = await si.post('sys:msg-run,get:history,as_data:true')
+  //console.log(history0)
+  //console.table(history0.runs)
+  expect(history0.runs.length).equal(3)
+
+  var history1 = await si.post(
+    'sys:msg-run,get:history,run_id:' + history0.runs[0].id + ',as_data:true'
+  )
+  //console.log(history1.run)
+  //console.table(history1.entries)
+  expect(history1.run.id).equals(history0.runs[0].id)
+  expect(history1.entries.length).equal(4)
 })
 
-lab.test('validate', { timeout: 3333 }, async () => {
+lab.test('validate-result', { timeout: 5555 }, async () => {
   var spec = {
+    name: 'validate-result',
     interval: 100,
     tests: [
       {
@@ -193,7 +208,10 @@ lab.test('validate', { timeout: 3333 }, async () => {
 
   var clock = Lolex.createClock()
 
-  var si = await seneca_instance({}, { spec: spec, clock: clock }).ready()
+  var si = await seneca_instance(
+    { log: 'silent' },
+    { spec: spec, clock: clock }
+  ).ready()
   expect(si).exists()
 
   si.message('a:1', async m => {
@@ -212,18 +230,60 @@ lab.test('validate', { timeout: 3333 }, async () => {
   //console.dir(current0,{depth:5})
   expect(current0.tests[0].pass).equals(false)
 
-  var history0 = await si.post('sys:msg-run,get:history')
-  //console.log('HISTORY')
-  //console.dir(history0,{depth:6})
-  expect(history0.summary.length).equal(1)
+  var store0 = await si.post('sys:msg-run,get:store')
+  //console.log('STORE')
+  //console.dir(store0,{depth:6})
+  expect(store0.summary.length).equal(1)
 
   clock.tick(100)
   await si.ready()
 
-  var history1 = await si.post('sys:msg-run,get:history')
-  //console.log('HISTORY')
-  //console.dir(history1,{depth:6})
-  expect(history1.summary.length).equal(2)
+  var store1 = await si.post('sys:msg-run,get:store')
+  //console.log('STORE')
+  //console.dir(store1,{depth:6})
+  expect(store1.summary.length).equal(2)
+})
+
+lab.test('match-error', { timeout: 3333 }, async () => {
+  var spec = {
+    name: 'match-error',
+    interval: 100,
+    tests: [
+      {
+        name: 't0',
+        scenario: [
+          { msg: ['a:1', { x: 2 }], out: { x: 2 } },
+          { msg: ['a:1', { x: 3 }], err: { code: 'bad' } },
+          { msg: ['a:1', { x: 4 }], out: { x: 4 } }
+        ]
+      }
+    ]
+  }
+
+  var clock = Lolex.createClock()
+
+  var si = await seneca_instance(
+    { log: 'silent' },
+    { spec: spec, clock: clock }
+  ).ready()
+  expect(si).exists()
+
+  si.message('a:1', async function(m) {
+    if (3 === m.x) this.fail('bad')
+    return { x: m.x }
+  })
+
+  await si.post('sys:msg-run,cmd:start')
+  await si.ready()
+
+  var status0 = await si.post('sys:msg-run,get:status')
+  //console.log('status0', status0)
+  expect(status0).contains({ running: true, runs: 1 })
+
+  var current0 = await si.post('sys:msg-run,get:current')
+  //console.log('current0')
+  //console.dir(current0,{depth:5})
+  expect(current0.tests[0].pass).equals(true)
 })
 
 /*
@@ -236,5 +296,6 @@ function seneca_instance(seneca_options, plugin_options) {
   return Seneca(seneca_options, { legacy: { transport: false } })
     .test()
     .use('promisify')
+    .use('entity')
     .use(Plugin, plugin_options)
 }
