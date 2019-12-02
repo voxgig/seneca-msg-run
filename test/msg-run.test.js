@@ -23,6 +23,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
     tests: [
       {
         name: 't0',
+        fix: { b: 1 },
         scenario: [{ msg: ['a:1', { x: 2 }], out: { x: 2 } }]
       },
       {

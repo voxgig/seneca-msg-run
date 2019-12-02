@@ -452,7 +452,14 @@ const intern = (msg_run.intern = {
           var msgparts = ctx.test_spec.scenario[index].msg
           msgparts = Array.isArray(msgparts) ? msgparts : [msgparts]
           ctx.msg_pattern = ctx.seneca().util.Jsonic.stringify(msgparts[0])
+
+          if (ctx.test_spec.fix) {
+            var fix = ctx.seneca().util.Jsonic(ctx.test_spec.fix)
+            msgparts.unshift(fix)
+          }
+
           msgparts.unshift({})
+
           msgparts = msgparts.map(x => ctx.seneca().util.Jsonic(x))
 
           ctx.msg = ctx.seneca().util.deep.apply(null, msgparts)
