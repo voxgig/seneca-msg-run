@@ -6,6 +6,8 @@
 const Joi = require('@hapi/joi')
 const XState = require('xstate')
 
+const Inks = require('inks')
+
 module.exports = msg_run
 module.exports.defaults = {
   test: Joi.boolean().default(true),
@@ -97,13 +99,14 @@ function msg_run(options) {
     var limit = msg.limit || 11
     //var table = !!msg.table
     var run_id = msg.run_id
-    var as_data = !!msg.as_data
+    var as_data = 'data' === msg.as
+    var query = msg.q || {}
     var out = {}
 
+    query.limit$ = query.limit$ || limit
+
     if (null == run_id) {
-      var msgrunlist = await seneca
-        .entity('sys/msgrun')
-        .list$({ limit$: limit })
+      var msgrunlist = await seneca.entity('sys/msgrun').list$()
 
       if (as_data) {
         msgrunlist = msgrunlist.map(x => x.data$())
@@ -114,9 +117,10 @@ function msg_run(options) {
       var msgrun = await seneca.entity('sys/msgrun').load$(msg.run_id)
       if (msgrun) {
         out.run = msgrun
+        query.msgrun_id = msgrun.id
         var msgrunentrylist = await seneca
           .entity('sys/msgrunentry')
-          .list$({ msgrun_id: msgrun.id })
+          .list$(query)
 
         if (as_data) {
           msgrunentrylist = msgrunentrylist.map(x => x.data$())
@@ -224,7 +228,8 @@ const intern = (msg_run.intern = {
         finish: ctx => resolve(ctx),
         test_spec: test_spec,
         index: 0,
-        results: []
+        results: [],
+        stepmap: {}
       }
 
       const interpreter = intern.make_scenario_interpreter(
@@ -441,6 +446,7 @@ const intern = (msg_run.intern = {
             msg: ctx.msg,
             res: ctx.res
           })
+          ctx.stepmap[ctx.stepname] = ctx.res
           ctx.index++
         }
       },
@@ -449,6 +455,7 @@ const intern = (msg_run.intern = {
           var index = ctx.index
 
           // TODO: pre process this
+          ctx.stepname = ctx.test_spec.scenario[index].name || 'step-' + index
           var msgparts = ctx.test_spec.scenario[index].msg
           msgparts = Array.isArray(msgparts) ? msgparts : [msgparts]
           ctx.msg_pattern = ctx.seneca().util.Jsonic.stringify(msgparts[0])
@@ -463,6 +470,10 @@ const intern = (msg_run.intern = {
           msgparts = msgparts.map(x => ctx.seneca().util.Jsonic(x))
 
           ctx.msg = ctx.seneca().util.deep.apply(null, msgparts)
+
+          //console.log('STEPMAP', ctx.stepmap)
+          ctx.msg = Inks(ctx.msg, ctx.stepmap)
+
           ctx.msg_start = Date.now()
           return ctx.seneca().post(ctx.msg)
         }

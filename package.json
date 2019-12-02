@@ -1,6 +1,6 @@
 {
   "name": "@seneca/msg-run",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "",
   "main": "msg-run.js",
   "scripts": {
@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/voxgig/seneca-msg-run#readme",
   "dependencies": {
+    "inks": "^1.0.2",
     "xstate": "^4.7.1"
   },
   "devDependencies": {

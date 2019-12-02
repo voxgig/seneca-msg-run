@@ -29,9 +29,9 @@ lab.test('happy', { timeout: 5555 }, async () => {
       {
         name: 't1',
         scenario: [
-          { msg: ['a:1', { x: 3 }], out: { x: 3 } },
+          { name: 's0', msg: ['a:1', { x: 3 }], out: { x: 3 } },
           { msg: ['a:2', { y: 4 }], out: { y: 4 } },
-          { msg: ['a:1', { x: 5 }], out: { x: 5 } }
+          { msg: ['a:1', { x: 5, z: '`s0:out.x`' }], out: { x: 5, z: 3 } }
         ]
       }
     ]
@@ -43,7 +43,11 @@ lab.test('happy', { timeout: 5555 }, async () => {
   expect(si).exists()
 
   si.message('a:1', async m => {
-    return { x: m.x }
+    var out = { x: m.x }
+    if (m.z) {
+      out.z = m.z
+    }
+    return out
   })
 
   si.message('a:2', async m => {
@@ -103,7 +107,9 @@ lab.test('happy', { timeout: 5555 }, async () => {
   expect(current1.duration).above(0)
   expect(current1.tests.length).equal(2)
   expect(current1.tests[0].results.length).equal(1)
+  expect(current1.tests[0].pass).true()
   expect(current1.tests[1].results.length).equal(3)
+  expect(current1.tests[1].pass).true()
 
   var store0 = await si.post('sys:msg-run,get:store,full:true')
   //console.log('STORE')
@@ -177,13 +183,13 @@ lab.test('happy', { timeout: 5555 }, async () => {
   //console.dir(store3)
   expect(store3.summary.length).equal(3)
 
-  var history0 = await si.post('sys:msg-run,get:history,as_data:true')
+  var history0 = await si.post('sys:msg-run,get:history,as:data')
   //console.log(history0)
   //console.table(history0.runs)
   expect(history0.runs.length).equal(3)
 
   var history1 = await si.post(
-    'sys:msg-run,get:history,run_id:' + history0.runs[0].id + ',as_data:true'
+    'sys:msg-run,get:history,run_id:' + history0.runs[0].id + ',as:data'
   )
   //console.log(history1.run)
   //console.table(history1.entries)
