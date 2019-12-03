@@ -106,7 +106,7 @@ function msg_run(options) {
     query.limit$ = query.limit$ || limit
 
     if (null == run_id) {
-      var msgrunlist = await seneca.entity('sys/msgrun').list$()
+      var msgrunlist = await seneca.entity('sys/msgrun').list$(query)
 
       if (as_data) {
         msgrunlist = msgrunlist.map(x => x.data$())
@@ -384,6 +384,14 @@ const intern = (msg_run.intern = {
         failed: failed,
         status: 0 < failed ? 'F' : 'P',
         fail_names: fail_names.join(',')
+      }
+
+      if ('F' === msgrundata.status) {
+        seneca.act('sys:msg-run,hook:notify,on:fail', {
+          default$: {},
+          run: msgrundata,
+          full: run
+        })
       }
 
       var msgrun = await seneca
