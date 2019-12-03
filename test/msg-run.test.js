@@ -225,16 +225,18 @@ lab.test('validate-result', { timeout: 5555 }, async () => {
     return 3 === m.x ? { x: 'bad' } : { x: m.x }
   })
 
+  console.log('AAA')
+
   await si.post('sys:msg-run,cmd:start')
   await si.ready()
 
   var status0 = await si.post('sys:msg-run,get:status')
-  //console.log('status0', status0)
+  console.log('status0', status0)
   expect(status0).contains({ running: true, runs: 1 })
 
   var current0 = await si.post('sys:msg-run,get:current')
-  //console.log('current0')
-  //console.dir(current0,{depth:5})
+  console.log('current0')
+  console.dir(current0, { depth: 5 })
   expect(current0.tests[0].pass).equals(false)
 
   var store0 = await si.post('sys:msg-run,get:store')

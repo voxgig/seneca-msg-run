@@ -57,6 +57,10 @@ function msg_run(options) {
     .message('sys:msg-run,get:history', get_history)
     .message('sys:msg-run,get:store', get_store)
 
+    .message('sys:msg-run,hook:notify,on:fail', async () => {
+      return
+    })
+
   // .prepare(async function prepare_msg_run() {})
 
   // TODO: validate spec
