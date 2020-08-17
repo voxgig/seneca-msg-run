@@ -24,17 +24,17 @@ lab.test('happy', { timeout: 5555 }, async () => {
       {
         name: 't0',
         // fix: { b: 1 },
-        scenario: [{ msg: ['a:1', { x: 2 }], out: { x: 2 } }]
+        scenario: [{ msg: ['a:1', { x: 2 }], out: { x: 2 } }],
       },
       {
         name: 't1',
         scenario: [
           { name: 's0', msg: ['a:1', { x: 3 }], out: { x: 3 } },
           { msg: ['a:2', { y: 4 }], out: { y: 4 } },
-          { msg: ['a:1', { x: 5, z: '`s0:out.x`' }], out: { x: 5, z: 3 } }
-        ]
-      }
-    ]
+          { msg: ['a:1', { x: 5, z: '`s0:out.x`' }], out: { x: 5, z: 3 } },
+        ],
+      },
+    ],
   }
 
   var clock = Lolex.createClock()
@@ -42,7 +42,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
   var si = await seneca_instance({}, { spec: spec, clock: clock }).ready()
   expect(si).exists()
 
-  si.message('a:1', async m => {
+  si.message('a:1', async (m) => {
     var out = { x: m.x }
     if (m.z) {
       out.z = m.z
@@ -50,7 +50,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
     return out
   })
 
-  si.message('a:2', async m => {
+  si.message('a:2', async (m) => {
     return { y: m.y }
   })
 
@@ -65,7 +65,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
     end: undefined,
     run: undefined,
     duration: undefined,
-    tests: undefined
+    tests: undefined,
   })
 
   var previous0 = await si.post('sys:msg-run,get:previous')
@@ -75,7 +75,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
     end: undefined,
     run: undefined,
     duration: undefined,
-    tests: undefined
+    tests: undefined,
   })
 
   var start0 = await si.post('sys:msg-run,cmd:start')
@@ -97,7 +97,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
     end: undefined,
     run: undefined,
     duration: undefined,
-    tests: undefined
+    tests: undefined,
   })
 
   var current1 = await si.post('sys:msg-run,get:current')
@@ -207,10 +207,10 @@ lab.test('validate-result', { timeout: 5555 }, async () => {
         scenario: [
           { msg: ['a:1', { x: 2 }], out: { x: 2 } },
           { msg: ['a:1', { x: 3 }], out: { x: 3 } },
-          { msg: ['a:1', { x: 4 }], out: { x: 4 } }
-        ]
-      }
-    ]
+          { msg: ['a:1', { x: 4 }], out: { x: 4 } },
+        ],
+      },
+    ],
   }
 
   var clock = Lolex.createClock()
@@ -221,7 +221,7 @@ lab.test('validate-result', { timeout: 5555 }, async () => {
   ).ready()
   expect(si).exists()
 
-  si.message('a:1', async m => {
+  si.message('a:1', async (m) => {
     return 3 === m.x ? { x: 'bad' } : { x: m.x }
   })
 
@@ -263,10 +263,10 @@ lab.test('match-error', { timeout: 3333 }, async () => {
         scenario: [
           { msg: ['a:1', { x: 2 }], out: { x: 2 } },
           { msg: ['a:1', { x: 3 }], err: { code: 'bad' } },
-          { msg: ['a:1', { x: 4 }], out: { x: 4 } }
-        ]
-      }
-    ]
+          { msg: ['a:1', { x: 4 }], out: { x: 4 } },
+        ],
+      },
+    ],
   }
 
   var clock = Lolex.createClock()
@@ -277,8 +277,8 @@ lab.test('match-error', { timeout: 3333 }, async () => {
   ).ready()
   expect(si).exists()
 
-  si.message('a:1', async function(m) {
-    if (3 === m.x) this.fail('bad',{})
+  si.message('a:1', async function (m) {
+    if (3 === m.x) this.fail('bad', {})
     return { x: m.x }
   })
 

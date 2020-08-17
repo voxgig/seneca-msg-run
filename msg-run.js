@@ -12,15 +12,15 @@ module.exports = msg_run
 module.exports.defaults = {
   test: Joi.boolean().default(true),
   spec: Joi.object({
-    name: Joi.string().required(),
+    name: Joi.string().default('default'),
     interval: Joi.number().default(111111),
     tests: Joi.array()
       .items({
         name: Joi.string().required(),
-        scenario: Joi.array().default([])
+        scenario: Joi.array().default([]),
       })
-      .required()
-  }).default()
+      .default([]),
+  }).default(),
 }
 module.exports.errors = {}
 
@@ -39,11 +39,11 @@ function msg_run(options) {
       running: false,
       runs: 0,
       since: Date.now(),
-      current_test: {}
+      current_test: {},
     },
 
     // TODO: save as entity
-    store: []
+    store: [],
   }
 
   seneca
@@ -113,7 +113,7 @@ function msg_run(options) {
       var msgrunlist = await seneca.entity('sys/msgrun').list$(query)
 
       if (as_data) {
-        msgrunlist = msgrunlist.map(x => x.data$())
+        msgrunlist = msgrunlist.map((x) => x.data$())
       }
 
       out.runs = msgrunlist
@@ -127,7 +127,7 @@ function msg_run(options) {
           .list$(query)
 
         if (as_data) {
-          msgrunentrylist = msgrunentrylist.map(x => x.data$())
+          msgrunentrylist = msgrunentrylist.map((x) => x.data$())
         }
 
         out.entries = msgrunentrylist
@@ -140,7 +140,7 @@ function msg_run(options) {
   async function get_store(msg) {
     var history = {
       // TODO: move get_status to intern pure function
-      status: await get_status.call(this, msg)
+      status: await get_status.call(this, msg),
     }
 
     if (msg.full) {
@@ -177,7 +177,7 @@ function msg_run(options) {
           passed,
           failed,
           0 < failed ? 'F' : 'P',
-          fail_names.join(',')
+          fail_names.join(','),
         ]
 
         table.push(row)
@@ -191,7 +191,7 @@ function msg_run(options) {
 }
 
 const intern = (msg_run.intern = {
-  validate: function(ctx) {
+  validate: function (ctx) {
     var scenario_step = ctx.test_spec.scenario[ctx.index]
 
     // unexpected error
@@ -225,15 +225,15 @@ const intern = (msg_run.intern = {
     return null == ctx.check.error
   },
 
-  execute_test: async function(seneca, test_spec, machine) {
-    return new Promise(resolve => {
+  execute_test: async function (seneca, test_spec, machine) {
+    return new Promise((resolve) => {
       var machine_context = {
         seneca: () => seneca,
-        finish: ctx => resolve(ctx),
+        finish: (ctx) => resolve(ctx),
         test_spec: test_spec,
         index: 0,
         results: [],
-        stepmap: {}
+        stepmap: {},
       }
 
       const interpreter = intern.make_scenario_interpreter(
@@ -245,7 +245,7 @@ const intern = (msg_run.intern = {
     })
   },
 
-  runner: function(seneca, clock, msg, pi, machine) {
+  runner: function (seneca, clock, msg, pi, machine) {
     if (pi.status.running) return pi.status
 
     pi.status.running = true
@@ -260,7 +260,7 @@ const intern = (msg_run.intern = {
 
       pi.current = {
         start: Date.now(),
-        tests: []
+        tests: [],
       }
 
       var tests = pi.spec.tests
@@ -305,28 +305,28 @@ const intern = (msg_run.intern = {
       }
     }
   },
-  start: function(seneca, clock, msg, pi, machine) {
+  start: function (seneca, clock, msg, pi, machine) {
     return intern.runner(seneca, clock, msg, pi, machine)
   },
 
-  stop: function(msg, pi) {
+  stop: function (msg, pi) {
     pi.status.running = false
     return pi.status
   },
 
-  get_test_results: function(msg, src) {
+  get_test_results: function (msg, src) {
     var out = {
       run: src.run,
       start: src.start,
       end: src.end,
       duration: src.duration,
-      tests: src.tests
+      tests: src.tests,
     }
 
     return out
   },
 
-  store: async function(seneca, pi) {
+  store: async function (seneca, pi) {
     if (pi.current.start) {
       var stored_test = { ...pi.current }
       pi.store.push(stored_test)
@@ -363,7 +363,7 @@ const intern = (msg_run.intern = {
             duration: res.duration,
             kind: res.kind,
             seq: rI,
-            pass: res.pass
+            pass: res.pass,
           }
 
           if (!entry.pass) {
@@ -372,7 +372,7 @@ const intern = (msg_run.intern = {
               out: res.out,
               err: res.err,
               match: res.match,
-              check: res.check
+              check: res.check,
             }
           }
 
@@ -387,44 +387,36 @@ const intern = (msg_run.intern = {
         passed: passed,
         failed: failed,
         status: 0 < failed ? 'F' : 'P',
-        fail_names: fail_names.join(',')
+        fail_names: fail_names.join(','),
       }
 
       if ('F' === msgrundata.status) {
         seneca.act('sys:msg-run,hook:notify,on:fail', {
           default$: {},
           run: msgrundata,
-          full: run
+          full: run,
         })
-      }
-      else if ('P' === msgrundata.status) {
+      } else if ('P' === msgrundata.status) {
         seneca.act('sys:msg-run,hook:notify,on:pass', {
           default$: {},
           run: msgrundata,
-          full: run
+          full: run,
         })
       }
 
-      
-      var msgrun = await seneca
-        .entity('sys/msgrun')
-        .data$(msgrundata)
-        .save$()
+      var msgrun = await seneca.entity('sys/msgrun').data$(msgrundata).save$()
       //console.log(msgrun.data$())
 
       for (var eI = 0; eI < entries.length; eI++) {
         entry = entries[eI]
         entry.msgrun_id = msgrun.id
-        await seneca
-          .entity('sys/msgrunentry')
-          .data$(entry)
-          .save$()
+        await seneca.entity('sys/msgrunentry').data$(entry).save$()
         //console.log(msgrunentry.data$())
       }
     }
   },
 
-  make_scenario_machine: function(spec, validate) {
+  make_scenario_machine: function (spec, validate) {
     const config = {
       actions: {
         update_res: XState.assign({
@@ -437,7 +429,7 @@ const intern = (msg_run.intern = {
               start: ctx.msg_start,
               end: msg_end,
               duration: msg_end - ctx.msg_start,
-              pattern: ctx.msg_pattern
+              pattern: ctx.msg_pattern,
             }
 
             if (event.data instanceof Error) {
@@ -449,26 +441,26 @@ const intern = (msg_run.intern = {
             }
 
             return res
-          }
+          },
         }),
 
         validate_res: XState.assign({
-          valid: ctx => {
+          valid: (ctx) => {
             // console.log('VALIDATE_RES', ctx.msg)
             var pass = validate(ctx)
             ctx.res.pass = pass
             return pass
-          }
+          },
         }),
 
         result_entry: (ctx, event) => {
           ctx.results.push({
             msg: ctx.msg,
-            res: ctx.res
+            res: ctx.res,
           })
           ctx.stepmap[ctx.stepname] = ctx.res
           ctx.index++
-        }
+        },
       },
       services: {
         outbound_send: (ctx, event) => {
@@ -487,7 +479,7 @@ const intern = (msg_run.intern = {
 
           msgparts.unshift({})
 
-          msgparts = msgparts.map(x => ctx.seneca().util.Jsonic(x))
+          msgparts = msgparts.map((x) => ctx.seneca().util.Jsonic(x))
 
           ctx.msg = ctx.seneca().util.deep.apply(null, msgparts)
 
@@ -496,16 +488,16 @@ const intern = (msg_run.intern = {
 
           ctx.msg_start = Date.now()
           return ctx.seneca().post(ctx.msg)
-        }
+        },
       },
       guards: {
-        result_is_invalid: ctx => {
+        result_is_invalid: (ctx) => {
           return !ctx.valid
         },
-        result_has_more_msgs: ctx => {
+        result_has_more_msgs: (ctx) => {
           return ctx.index < ctx.test_spec.scenario.length - 1
-        }
-      }
+        },
+      },
     }
 
     const machine = XState.Machine(
@@ -519,24 +511,24 @@ const intern = (msg_run.intern = {
               src: 'outbound_send',
               onDone: {
                 target: 'result',
-                actions: ['update_res', 'validate_res']
+                actions: ['update_res', 'validate_res'],
               },
               onError: {
                 target: 'result',
-                actions: ['update_res', 'validate_res']
-              }
-            }
+                actions: ['update_res', 'validate_res'],
+              },
+            },
           },
 
           inbound: {
             on: {
               MESSAGE: 'message',
-              RESULT: 'result'
-            }
+              RESULT: 'result',
+            },
           },
 
           message: {
-            on: { '': 'inbound' }
+            on: { '': 'inbound' },
           },
 
           result: {
@@ -545,28 +537,28 @@ const intern = (msg_run.intern = {
               '': [
                 { target: 'fail', cond: 'result_is_invalid' },
                 { target: 'outbound', cond: 'result_has_more_msgs' },
-                { target: 'pass' }
-              ]
-            }
+                { target: 'pass' },
+              ],
+            },
           },
 
           pass: {
             entry: XState.assign({ pass: true }),
-            on: { '': 'stop' }
+            on: { '': 'stop' },
           },
 
           fail: {
             entry: XState.assign({ pass: false }),
-            on: { '': 'stop' }
+            on: { '': 'stop' },
           },
 
           stop: {
-            entry: ctx => {
+            entry: (ctx) => {
               ctx.finish(ctx)
             },
-            type: 'final'
-          }
-        }
+            type: 'final',
+          },
+        },
       },
       config
     )
@@ -574,12 +566,12 @@ const intern = (msg_run.intern = {
     return machine
   },
 
-  make_scenario_interpreter: function(machine, ctx) {
+  make_scenario_interpreter: function (machine, ctx) {
     ctx.mark = Math.random()
     const machine_instance = machine.withContext(ctx)
 
     const interpreter = XState.interpret(machine_instance).onTransition(
-      state => {
+      (state) => {
         /*
             console.log(intern.aligner([
               0, 'TRANSITION',
@@ -597,7 +589,7 @@ const intern = (msg_run.intern = {
     return interpreter
   },
 
-  make_clock: function(options) {
+  make_clock: function (options) {
     var clock = options.clock
 
     if (!options.clock) {
@@ -605,12 +597,12 @@ const intern = (msg_run.intern = {
         setTimeout: setTimeout,
         setInterval: setInterval,
         clearTimeout: clearTimeout,
-        clearInterval: clearInterval
+        clearInterval: clearInterval,
       }
     }
 
     return clock
-  }
+  },
 
   /*
   aligner: function(line) {
