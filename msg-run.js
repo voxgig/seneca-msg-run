@@ -57,7 +57,7 @@ function msg_run(options) {
     .message('sys:msg-run,get:history', get_history)
     .message('sys:msg-run,get:store', get_store)
 
-    .message('sys:msg-run,hook:notify,on:fail', async () => {
+    .message('sys:msg-run,hook:notify', async () => {
       return
     })
 
@@ -397,7 +397,15 @@ const intern = (msg_run.intern = {
           full: run
         })
       }
+      else if ('P' === msgrundata.status) {
+        seneca.act('sys:msg-run,hook:notify,on:pass', {
+          default$: {},
+          run: msgrundata,
+          full: run
+        })
+      }
 
+      
       var msgrun = await seneca
         .entity('sys/msgrun')
         .data$(msgrundata)

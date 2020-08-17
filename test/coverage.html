@@ -536,7 +536,7 @@
         <li><a href="#tests">Test Report</a></li>
         <li><a href="#coverage">Coverage Report</a></li>
         <li class="">
-            <span class="cov high">94.02</span>
+            <span class="cov high">93.26</span>
             <a href="#msg-run.js"><span class="basename">msg-run.js</span></a>
         </li>
         <li class="generated">
@@ -551,7 +551,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">5</div>
-          <div class="duration">7114</div>
+          <div class="duration">1510</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -576,7 +576,7 @@
               <td class="test-title">engine foo
                   
               </td>
-              <td class="test-duration">13</td>
+              <td class="test-duration">3</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">2</td>
@@ -590,21 +590,21 @@
               <td class="test-title">happy
                   
               </td>
-              <td class="test-duration">3519</td>
+              <td class="test-duration">857</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">4</td>
               <td class="test-title">validate-result
                   
               </td>
-              <td class="test-duration">1898</td>
+              <td class="test-duration">386</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">5</td>
               <td class="test-title">match-error
                   
               </td>
-              <td class="test-duration">1661</td>
+              <td class="test-duration">250</td>
           </tr>
           </tbody>
       </table>
@@ -612,10 +612,10 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">94.09%</div>
-            <div class="sloc">474</div>
-            <div class="hits">446</div>
-            <div class="misses">28</div>
+            <div class="percentage">93.35%</div>
+            <div class="sloc">481</div>
+            <div class="hits">449</div>
+            <div class="misses">32</div>
         </div>
         <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="generated" id="show-generated">
@@ -625,10 +625,10 @@
             <div class="file ">
                 <h2 id="msg-run.js">msg-run.js </h2>
                 <div class="stats high">
-                    <div class="percentage">94.02%</div>
-                    <div class="sloc">468</div>
-                    <div class="hits">440</div>
-                    <div class="misses">28</div>
+                    <div class="percentage">93.26%</div>
+                    <div class="sloc">475</div>
+                    <div class="hits">443</div>
+                    <div class="misses">32</div>
                 </div>
                 <table>
                     <thead>
@@ -999,7 +999,7 @@
                           <td class="line" data-tooltip>60</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    .message(&#x27;sys:msg-run,hook:notify,on:fail&#x27;, async () &#x3D;&gt; {</td>
+                          <td class="source">    .message(&#x27;sys:msg-run,hook:notify&#x27;, async () &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__61" class="hit">
                           <td class="line" data-tooltip>61</td>
@@ -3035,251 +3035,251 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source">      }</td>
                           
-                        </tr>            <tr id="msg-run.js__400" class="hit">
+                        </tr>            <tr id="msg-run.js__400" class="chunks">
                           <td class="line" data-tooltip>400</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>      else if (</div><div class="miss true" data-tooltip>&#x27;P&#x27; &#x3D;&#x3D;&#x3D; msgrundata.status</div><div>) {</div></td>
                           
                         </tr>            <tr id="msg-run.js__401" class="hit">
                           <td class="line" data-tooltip>401</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">      var msgrun &#x3D; await seneca</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">        seneca.act(&#x27;sys:msg-run,hook:notify,on:pass&#x27;, {</td>
                           
                         </tr>            <tr id="msg-run.js__402" class="hit">
                           <td class="line" data-tooltip>402</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        .entity(&#x27;sys/msgrun&#x27;)</td>
+                          <td class="source">          default$: {},</td>
                           
                         </tr>            <tr id="msg-run.js__403" class="hit">
                           <td class="line" data-tooltip>403</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        .data$(msgrundata)</td>
+                          <td class="source">          run: msgrundata,</td>
                           
                         </tr>            <tr id="msg-run.js__404" class="hit">
                           <td class="line" data-tooltip>404</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        .save$()</td>
+                          <td class="source">          full: run</td>
                           
                         </tr>            <tr id="msg-run.js__405" class="hit">
                           <td class="line" data-tooltip>405</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      //console.log(msgrun.data$())</td>
+                          <td class="source">        })</td>
                           
                         </tr>            <tr id="msg-run.js__406" class="hit">
                           <td class="line" data-tooltip>406</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="msg-run.js__407" class="hit">
                           <td class="line" data-tooltip>407</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">      for (var eI &#x3D; 0; eI &lt; entries.length; eI++) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__408" class="hit">
                           <td class="line" data-tooltip>408</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">        entry &#x3D; entries[eI]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      </td>
                           
                         </tr>            <tr id="msg-run.js__409" class="hit">
                           <td class="line" data-tooltip>409</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">        entry.msgrun_id &#x3D; msgrun.id</td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">      var msgrun &#x3D; await seneca</td>
                           
                         </tr>            <tr id="msg-run.js__410" class="hit">
                           <td class="line" data-tooltip>410</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">        await seneca</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        .entity(&#x27;sys/msgrun&#x27;)</td>
                           
                         </tr>            <tr id="msg-run.js__411" class="hit">
                           <td class="line" data-tooltip>411</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          .entity(&#x27;sys/msgrunentry&#x27;)</td>
+                          <td class="source">        .data$(msgrundata)</td>
                           
                         </tr>            <tr id="msg-run.js__412" class="hit">
                           <td class="line" data-tooltip>412</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          .data$(entry)</td>
+                          <td class="source">        .save$()</td>
                           
                         </tr>            <tr id="msg-run.js__413" class="hit">
                           <td class="line" data-tooltip>413</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          .save$()</td>
+                          <td class="source">      //console.log(msgrun.data$())</td>
                           
                         </tr>            <tr id="msg-run.js__414" class="hit">
                           <td class="line" data-tooltip>414</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        //console.log(msgrunentry.data$())</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__415" class="hit">
                           <td class="line" data-tooltip>415</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">      for (var eI &#x3D; 0; eI &lt; entries.length; eI++) {</td>
                           
                         </tr>            <tr id="msg-run.js__416" class="hit">
                           <td class="line" data-tooltip>416</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">        entry &#x3D; entries[eI]</td>
                           
                         </tr>            <tr id="msg-run.js__417" class="hit">
                           <td class="line" data-tooltip>417</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  },</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">        entry.msgrun_id &#x3D; msgrun.id</td>
                           
                         </tr>            <tr id="msg-run.js__418" class="hit">
                           <td class="line" data-tooltip>418</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">        await seneca</td>
                           
                         </tr>            <tr id="msg-run.js__419" class="hit">
                           <td class="line" data-tooltip>419</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  make_scenario_machine: function(spec, validate) {</td>
+                          <td class="source">          .entity(&#x27;sys/msgrunentry&#x27;)</td>
                           
                         </tr>            <tr id="msg-run.js__420" class="hit">
                           <td class="line" data-tooltip>420</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    const config &#x3D; {</td>
+                          <td class="source">          .data$(entry)</td>
                           
                         </tr>            <tr id="msg-run.js__421" class="hit">
                           <td class="line" data-tooltip>421</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      actions: {</td>
+                          <td class="source">          .save$()</td>
                           
                         </tr>            <tr id="msg-run.js__422" class="hit">
                           <td class="line" data-tooltip>422</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        update_res: XState.assign({</td>
+                          <td class="source">        //console.log(msgrunentry.data$())</td>
                           
                         </tr>            <tr id="msg-run.js__423" class="hit">
                           <td class="line" data-tooltip>423</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          res: (ctx, event) &#x3D;&gt; {</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="msg-run.js__424" class="hit">
                           <td class="line" data-tooltip>424</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            // console.log(&#x27;UPDATE_RES&#x27;, ctx.msg)</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="msg-run.js__425" class="hit">
                           <td class="line" data-tooltip>425</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">  },</td>
                           
                         </tr>            <tr id="msg-run.js__426" class="hit">
                           <td class="line" data-tooltip>426</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            var msg_end &#x3D; Date.now()</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__427" class="hit">
                           <td class="line" data-tooltip>427</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">            var res &#x3D; {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  make_scenario_machine: function(spec, validate) {</td>
                           
                         </tr>            <tr id="msg-run.js__428" class="hit">
                           <td class="line" data-tooltip>428</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              msg: ctx.msg,</td>
+                          <td class="source">    const config &#x3D; {</td>
                           
                         </tr>            <tr id="msg-run.js__429" class="hit">
                           <td class="line" data-tooltip>429</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              start: ctx.msg_start,</td>
+                          <td class="source">      actions: {</td>
                           
                         </tr>            <tr id="msg-run.js__430" class="hit">
                           <td class="line" data-tooltip>430</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              end: msg_end,</td>
+                          <td class="source">        update_res: XState.assign({</td>
                           
                         </tr>            <tr id="msg-run.js__431" class="hit">
                           <td class="line" data-tooltip>431</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              duration: msg_end - ctx.msg_start,</td>
+                          <td class="source">          res: (ctx, event) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__432" class="hit">
                           <td class="line" data-tooltip>432</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              pattern: ctx.msg_pattern</td>
+                          <td class="source">            // console.log(&#x27;UPDATE_RES&#x27;, ctx.msg)</td>
                           
                         </tr>            <tr id="msg-run.js__433" class="hit">
                           <td class="line" data-tooltip>433</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__434" class="hit">
                           <td class="line" data-tooltip>434</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            var msg_end &#x3D; Date.now()</td>
                           
                         </tr>            <tr id="msg-run.js__435" class="hit">
                           <td class="line" data-tooltip>435</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>19</td>
-                          <td class="source">            if (event.data instanceof Error) {</td>
+                          <td class="source">            var res &#x3D; {</td>
                           
                         </tr>            <tr id="msg-run.js__436" class="hit">
                           <td class="line" data-tooltip>436</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">              res.kind &#x3D; &#x27;err&#x27;</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">              msg: ctx.msg,</td>
                           
                         </tr>            <tr id="msg-run.js__437" class="hit">
                           <td class="line" data-tooltip>437</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">              res.err &#x3D; event.data</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">              start: ctx.msg_start,</td>
                           
                         </tr>            <tr id="msg-run.js__438" class="hit">
                           <td class="line" data-tooltip>438</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            } else {</td>
+                          <td class="source">              end: msg_end,</td>
                           
                         </tr>            <tr id="msg-run.js__439" class="hit">
                           <td class="line" data-tooltip>439</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>18</td>
-                          <td class="source">              res.kind &#x3D; &#x27;out&#x27;</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">              duration: msg_end - ctx.msg_start,</td>
                           
                         </tr>            <tr id="msg-run.js__440" class="hit">
                           <td class="line" data-tooltip>440</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>18</td>
-                          <td class="source">              res.out &#x3D; event.data</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">              pattern: ctx.msg_pattern</td>
                           
                         </tr>            <tr id="msg-run.js__441" class="hit">
                           <td class="line" data-tooltip>441</td>
@@ -3297,337 +3297,337 @@
                           <td class="line" data-tooltip>443</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>19</td>
-                          <td class="source">            return res</td>
+                          <td class="source">            if (event.data instanceof Error) {</td>
                           
                         </tr>            <tr id="msg-run.js__444" class="hit">
                           <td class="line" data-tooltip>444</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">              res.kind &#x3D; &#x27;err&#x27;</td>
                           
                         </tr>            <tr id="msg-run.js__445" class="hit">
                           <td class="line" data-tooltip>445</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        }),</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">              res.err &#x3D; event.data</td>
                           
                         </tr>            <tr id="msg-run.js__446" class="hit">
                           <td class="line" data-tooltip>446</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            } else {</td>
                           
                         </tr>            <tr id="msg-run.js__447" class="hit">
                           <td class="line" data-tooltip>447</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        validate_res: XState.assign({</td>
+                          <td class="hits" data-tooltip>18</td>
+                          <td class="source">              res.kind &#x3D; &#x27;out&#x27;</td>
                           
                         </tr>            <tr id="msg-run.js__448" class="hit">
                           <td class="line" data-tooltip>448</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          valid: ctx &#x3D;&gt; {</td>
+                          <td class="hits" data-tooltip>18</td>
+                          <td class="source">              res.out &#x3D; event.data</td>
                           
                         </tr>            <tr id="msg-run.js__449" class="hit">
                           <td class="line" data-tooltip>449</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            // console.log(&#x27;VALIDATE_RES&#x27;, ctx.msg)</td>
+                          <td class="source">            }</td>
                           
                         </tr>            <tr id="msg-run.js__450" class="hit">
                           <td class="line" data-tooltip>450</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            var pass &#x3D; validate(ctx)</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__451" class="hit">
                           <td class="line" data-tooltip>451</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>19</td>
-                          <td class="source">            ctx.res.pass &#x3D; pass</td>
+                          <td class="source">            return res</td>
                           
                         </tr>            <tr id="msg-run.js__452" class="hit">
                           <td class="line" data-tooltip>452</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">            return pass</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          }</td>
                           
                         </tr>            <tr id="msg-run.js__453" class="hit">
                           <td class="line" data-tooltip>453</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="source">        }),</td>
                           
                         </tr>            <tr id="msg-run.js__454" class="hit">
                           <td class="line" data-tooltip>454</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }),</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__455" class="hit">
                           <td class="line" data-tooltip>455</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        validate_res: XState.assign({</td>
                           
                         </tr>            <tr id="msg-run.js__456" class="hit">
                           <td class="line" data-tooltip>456</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        result_entry: (ctx, event) &#x3D;&gt; {</td>
+                          <td class="source">          valid: ctx &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__457" class="hit">
                           <td class="line" data-tooltip>457</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          ctx.results.push({</td>
+                          <td class="source">            // console.log(&#x27;VALIDATE_RES&#x27;, ctx.msg)</td>
                           
                         </tr>            <tr id="msg-run.js__458" class="hit">
                           <td class="line" data-tooltip>458</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            msg: ctx.msg,</td>
+                          <td class="source">            var pass &#x3D; validate(ctx)</td>
                           
                         </tr>            <tr id="msg-run.js__459" class="hit">
                           <td class="line" data-tooltip>459</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">            res: ctx.res</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">            ctx.res.pass &#x3D; pass</td>
                           
                         </tr>            <tr id="msg-run.js__460" class="hit">
                           <td class="line" data-tooltip>460</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          })</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">            return pass</td>
                           
                         </tr>            <tr id="msg-run.js__461" class="hit">
                           <td class="line" data-tooltip>461</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.stepmap[ctx.stepname] &#x3D; ctx.res</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          }</td>
                           
                         </tr>            <tr id="msg-run.js__462" class="hit">
                           <td class="line" data-tooltip>462</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.index++</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        }),</td>
                           
                         </tr>            <tr id="msg-run.js__463" class="hit">
                           <td class="line" data-tooltip>463</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__464" class="hit">
                           <td class="line" data-tooltip>464</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      },</td>
+                          <td class="source">        result_entry: (ctx, event) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__465" class="hit">
                           <td class="line" data-tooltip>465</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      services: {</td>
+                          <td class="source">          ctx.results.push({</td>
                           
                         </tr>            <tr id="msg-run.js__466" class="hit">
                           <td class="line" data-tooltip>466</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        outbound_send: (ctx, event) &#x3D;&gt; {</td>
+                          <td class="source">            msg: ctx.msg,</td>
                           
                         </tr>            <tr id="msg-run.js__467" class="hit">
                           <td class="line" data-tooltip>467</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          var index &#x3D; ctx.index</td>
+                          <td class="source">            res: ctx.res</td>
                           
                         </tr>            <tr id="msg-run.js__468" class="hit">
                           <td class="line" data-tooltip>468</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">          })</td>
                           
                         </tr>            <tr id="msg-run.js__469" class="hit">
                           <td class="line" data-tooltip>469</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          // TODO: pre process this</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          ctx.stepmap[ctx.stepname] &#x3D; ctx.res</td>
                           
                         </tr>            <tr id="msg-run.js__470" class="hit">
                           <td class="line" data-tooltip>470</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.stepname &#x3D; ctx.test_spec.scenario[index].name || &#x27;step-&#x27; + index</td>
+                          <td class="source">          ctx.index++</td>
                           
                         </tr>            <tr id="msg-run.js__471" class="hit">
                           <td class="line" data-tooltip>471</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          var msgparts &#x3D; ctx.test_spec.scenario[index].msg</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        }</td>
                           
-                        </tr>            <tr id="msg-run.js__472" class="chunks">
+                        </tr>            <tr id="msg-run.js__472" class="hit">
                           <td class="line" data-tooltip>472</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>          msgparts &#x3D; </div><div class="miss true" data-tooltip>Array.isArray(msgparts)</div><div> ? msgparts : </div><div class="miss never" data-tooltip>[msgparts]</div></td>
+                          <td class="source">      },</td>
                           
                         </tr>            <tr id="msg-run.js__473" class="hit">
                           <td class="line" data-tooltip>473</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.msg_pattern &#x3D; ctx.seneca().util.Jsonic.stringify(msgparts[0])</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      services: {</td>
                           
                         </tr>            <tr id="msg-run.js__474" class="hit">
                           <td class="line" data-tooltip>474</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        outbound_send: (ctx, event) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__475" class="hit">
                           <td class="line" data-tooltip>475</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          if (ctx.test_spec.fix) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          var index &#x3D; ctx.index</td>
                           
                         </tr>            <tr id="msg-run.js__476" class="hit">
                           <td class="line" data-tooltip>476</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">            var fix &#x3D; ctx.seneca().util.Jsonic(ctx.test_spec.fix)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__477" class="hit">
                           <td class="line" data-tooltip>477</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">            msgparts.unshift(fix)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          // TODO: pre process this</td>
                           
                         </tr>            <tr id="msg-run.js__478" class="hit">
                           <td class="line" data-tooltip>478</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          ctx.stepname &#x3D; ctx.test_spec.scenario[index].name || &#x27;step-&#x27; + index</td>
                           
                         </tr>            <tr id="msg-run.js__479" class="hit">
                           <td class="line" data-tooltip>479</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          var msgparts &#x3D; ctx.test_spec.scenario[index].msg</td>
                           
-                        </tr>            <tr id="msg-run.js__480" class="hit">
+                        </tr>            <tr id="msg-run.js__480" class="chunks">
                           <td class="line" data-tooltip>480</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          msgparts.unshift({})</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>          msgparts &#x3D; </div><div class="miss true" data-tooltip>Array.isArray(msgparts)</div><div> ? msgparts : </div><div class="miss never" data-tooltip>[msgparts]</div></td>
                           
                         </tr>            <tr id="msg-run.js__481" class="hit">
                           <td class="line" data-tooltip>481</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          ctx.msg_pattern &#x3D; ctx.seneca().util.Jsonic.stringify(msgparts[0])</td>
                           
                         </tr>            <tr id="msg-run.js__482" class="hit">
                           <td class="line" data-tooltip>482</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          msgparts &#x3D; msgparts.map(x &#x3D;&gt; ctx.seneca().util.Jsonic(x))</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="msg-run.js__483" class="hit">
+                        </tr>            <tr id="msg-run.js__483" class="chunks">
                           <td class="line" data-tooltip>483</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>          if (</div><div class="miss false" data-tooltip>ctx.test_spec.fix</div><div>) {</div></td>
                           
-                        </tr>            <tr id="msg-run.js__484" class="hit">
+                        </tr>            <tr id="msg-run.js__484" class="miss">
                           <td class="line" data-tooltip>484</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.msg &#x3D; ctx.seneca().util.deep.apply(null, msgparts)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>            var fix &#x3D; ctx.seneca().util.Jsonic(ctx.test_spec.fix)</td>
                           
-                        </tr>            <tr id="msg-run.js__485" class="hit">
+                        </tr>            <tr id="msg-run.js__485" class="miss">
                           <td class="line" data-tooltip>485</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source" data-tooltip>            msgparts.unshift(fix)</td>
                           
                         </tr>            <tr id="msg-run.js__486" class="hit">
                           <td class="line" data-tooltip>486</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          //console.log(&#x27;STEPMAP&#x27;, ctx.stepmap)</td>
+                          <td class="source">          }</td>
                           
                         </tr>            <tr id="msg-run.js__487" class="hit">
                           <td class="line" data-tooltip>487</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.msg &#x3D; Inks(ctx.msg, ctx.stepmap)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__488" class="hit">
                           <td class="line" data-tooltip>488</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          msgparts.unshift({})</td>
                           
                         </tr>            <tr id="msg-run.js__489" class="hit">
                           <td class="line" data-tooltip>489</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>19</td>
-                          <td class="source">          ctx.msg_start &#x3D; Date.now()</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__490" class="hit">
                           <td class="line" data-tooltip>490</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>19</td>
-                          <td class="source">          return ctx.seneca().post(ctx.msg)</td>
+                          <td class="source">          msgparts &#x3D; msgparts.map(x &#x3D;&gt; ctx.seneca().util.Jsonic(x))</td>
                           
                         </tr>            <tr id="msg-run.js__491" class="hit">
                           <td class="line" data-tooltip>491</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__492" class="hit">
                           <td class="line" data-tooltip>492</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      },</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          ctx.msg &#x3D; ctx.seneca().util.deep.apply(null, msgparts)</td>
                           
                         </tr>            <tr id="msg-run.js__493" class="hit">
                           <td class="line" data-tooltip>493</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      guards: {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__494" class="hit">
                           <td class="line" data-tooltip>494</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        result_is_invalid: ctx &#x3D;&gt; {</td>
+                          <td class="source">          //console.log(&#x27;STEPMAP&#x27;, ctx.stepmap)</td>
                           
                         </tr>            <tr id="msg-run.js__495" class="hit">
                           <td class="line" data-tooltip>495</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          return !ctx.valid</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          ctx.msg &#x3D; Inks(ctx.msg, ctx.stepmap)</td>
                           
                         </tr>            <tr id="msg-run.js__496" class="hit">
                           <td class="line" data-tooltip>496</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        },</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__497" class="hit">
                           <td class="line" data-tooltip>497</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        result_has_more_msgs: ctx &#x3D;&gt; {</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          ctx.msg_start &#x3D; Date.now()</td>
                           
                         </tr>            <tr id="msg-run.js__498" class="hit">
                           <td class="line" data-tooltip>498</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          return ctx.index &lt; ctx.test_spec.scenario.length - 1</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">          return ctx.seneca().post(ctx.msg)</td>
                           
                         </tr>            <tr id="msg-run.js__499" class="hit">
                           <td class="line" data-tooltip>499</td>
@@ -3639,727 +3639,727 @@
                           <td class="line" data-tooltip>500</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      },</td>
                           
                         </tr>            <tr id="msg-run.js__501" class="hit">
                           <td class="line" data-tooltip>501</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source">      guards: {</td>
                           
                         </tr>            <tr id="msg-run.js__502" class="hit">
                           <td class="line" data-tooltip>502</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        result_is_invalid: ctx &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__503" class="hit">
                           <td class="line" data-tooltip>503</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">    const machine &#x3D; XState.Machine(</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          return !ctx.valid</td>
                           
                         </tr>            <tr id="msg-run.js__504" class="hit">
                           <td class="line" data-tooltip>504</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      {</td>
+                          <td class="source">        },</td>
                           
                         </tr>            <tr id="msg-run.js__505" class="hit">
                           <td class="line" data-tooltip>505</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        id: &#x27;msgrun&#x27;,</td>
+                          <td class="source">        result_has_more_msgs: ctx &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__506" class="hit">
                           <td class="line" data-tooltip>506</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        initial: &#x27;outbound&#x27;,</td>
+                          <td class="source">          return ctx.index &lt; ctx.test_spec.scenario.length - 1</td>
                           
                         </tr>            <tr id="msg-run.js__507" class="hit">
                           <td class="line" data-tooltip>507</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        states: {</td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="msg-run.js__508" class="hit">
                           <td class="line" data-tooltip>508</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          outbound: {</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="msg-run.js__509" class="hit">
                           <td class="line" data-tooltip>509</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            invoke: {</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="msg-run.js__510" class="hit">
                           <td class="line" data-tooltip>510</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              id: &#x27;send&#x27;,</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__511" class="hit">
                           <td class="line" data-tooltip>511</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">              src: &#x27;outbound_send&#x27;,</td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">    const machine &#x3D; XState.Machine(</td>
                           
                         </tr>            <tr id="msg-run.js__512" class="hit">
                           <td class="line" data-tooltip>512</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              onDone: {</td>
+                          <td class="source">      {</td>
                           
                         </tr>            <tr id="msg-run.js__513" class="hit">
                           <td class="line" data-tooltip>513</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                target: &#x27;result&#x27;,</td>
+                          <td class="source">        id: &#x27;msgrun&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__514" class="hit">
                           <td class="line" data-tooltip>514</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                actions: [&#x27;update_res&#x27;, &#x27;validate_res&#x27;]</td>
+                          <td class="source">        initial: &#x27;outbound&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__515" class="hit">
                           <td class="line" data-tooltip>515</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              },</td>
+                          <td class="source">        states: {</td>
                           
                         </tr>            <tr id="msg-run.js__516" class="hit">
                           <td class="line" data-tooltip>516</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              onError: {</td>
+                          <td class="source">          outbound: {</td>
                           
                         </tr>            <tr id="msg-run.js__517" class="hit">
                           <td class="line" data-tooltip>517</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                target: &#x27;result&#x27;,</td>
+                          <td class="source">            invoke: {</td>
                           
                         </tr>            <tr id="msg-run.js__518" class="hit">
                           <td class="line" data-tooltip>518</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                actions: [&#x27;update_res&#x27;, &#x27;validate_res&#x27;]</td>
+                          <td class="source">              id: &#x27;send&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__519" class="hit">
                           <td class="line" data-tooltip>519</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              }</td>
+                          <td class="source">              src: &#x27;outbound_send&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__520" class="hit">
                           <td class="line" data-tooltip>520</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            }</td>
+                          <td class="source">              onDone: {</td>
                           
                         </tr>            <tr id="msg-run.js__521" class="hit">
                           <td class="line" data-tooltip>521</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          },</td>
+                          <td class="source">                target: &#x27;result&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__522" class="hit">
                           <td class="line" data-tooltip>522</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">                actions: [&#x27;update_res&#x27;, &#x27;validate_res&#x27;]</td>
                           
                         </tr>            <tr id="msg-run.js__523" class="hit">
                           <td class="line" data-tooltip>523</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          inbound: {</td>
+                          <td class="source">              },</td>
                           
                         </tr>            <tr id="msg-run.js__524" class="hit">
                           <td class="line" data-tooltip>524</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            on: {</td>
+                          <td class="source">              onError: {</td>
                           
                         </tr>            <tr id="msg-run.js__525" class="hit">
                           <td class="line" data-tooltip>525</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              MESSAGE: &#x27;message&#x27;,</td>
+                          <td class="source">                target: &#x27;result&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__526" class="hit">
                           <td class="line" data-tooltip>526</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              RESULT: &#x27;result&#x27;</td>
+                          <td class="source">                actions: [&#x27;update_res&#x27;, &#x27;validate_res&#x27;]</td>
                           
                         </tr>            <tr id="msg-run.js__527" class="hit">
                           <td class="line" data-tooltip>527</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            }</td>
+                          <td class="source">              }</td>
                           
                         </tr>            <tr id="msg-run.js__528" class="hit">
                           <td class="line" data-tooltip>528</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          },</td>
+                          <td class="source">            }</td>
                           
                         </tr>            <tr id="msg-run.js__529" class="hit">
                           <td class="line" data-tooltip>529</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">          },</td>
                           
                         </tr>            <tr id="msg-run.js__530" class="hit">
                           <td class="line" data-tooltip>530</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          message: {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__531" class="hit">
                           <td class="line" data-tooltip>531</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            on: { &#x27;&#x27;: &#x27;inbound&#x27; }</td>
+                          <td class="source">          inbound: {</td>
                           
                         </tr>            <tr id="msg-run.js__532" class="hit">
                           <td class="line" data-tooltip>532</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          },</td>
+                          <td class="source">            on: {</td>
                           
                         </tr>            <tr id="msg-run.js__533" class="hit">
                           <td class="line" data-tooltip>533</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">              MESSAGE: &#x27;message&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__534" class="hit">
                           <td class="line" data-tooltip>534</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          result: {</td>
+                          <td class="source">              RESULT: &#x27;result&#x27;</td>
                           
                         </tr>            <tr id="msg-run.js__535" class="hit">
                           <td class="line" data-tooltip>535</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            entry: &#x27;result_entry&#x27;,</td>
+                          <td class="source">            }</td>
                           
                         </tr>            <tr id="msg-run.js__536" class="hit">
                           <td class="line" data-tooltip>536</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            on: {</td>
+                          <td class="source">          },</td>
                           
                         </tr>            <tr id="msg-run.js__537" class="hit">
                           <td class="line" data-tooltip>537</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              &#x27;&#x27;: [</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__538" class="hit">
                           <td class="line" data-tooltip>538</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                { target: &#x27;fail&#x27;, cond: &#x27;result_is_invalid&#x27; },</td>
+                          <td class="source">          message: {</td>
                           
                         </tr>            <tr id="msg-run.js__539" class="hit">
                           <td class="line" data-tooltip>539</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                { target: &#x27;outbound&#x27;, cond: &#x27;result_has_more_msgs&#x27; },</td>
+                          <td class="source">            on: { &#x27;&#x27;: &#x27;inbound&#x27; }</td>
                           
                         </tr>            <tr id="msg-run.js__540" class="hit">
                           <td class="line" data-tooltip>540</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                { target: &#x27;pass&#x27; }</td>
+                          <td class="source">          },</td>
                           
                         </tr>            <tr id="msg-run.js__541" class="hit">
                           <td class="line" data-tooltip>541</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              ]</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__542" class="hit">
                           <td class="line" data-tooltip>542</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            }</td>
+                          <td class="source">          result: {</td>
                           
                         </tr>            <tr id="msg-run.js__543" class="hit">
                           <td class="line" data-tooltip>543</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          },</td>
+                          <td class="source">            entry: &#x27;result_entry&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__544" class="hit">
                           <td class="line" data-tooltip>544</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            on: {</td>
                           
                         </tr>            <tr id="msg-run.js__545" class="hit">
                           <td class="line" data-tooltip>545</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          pass: {</td>
+                          <td class="source">              &#x27;&#x27;: [</td>
                           
                         </tr>            <tr id="msg-run.js__546" class="hit">
                           <td class="line" data-tooltip>546</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            entry: XState.assign({ pass: true }),</td>
+                          <td class="source">                { target: &#x27;fail&#x27;, cond: &#x27;result_is_invalid&#x27; },</td>
                           
                         </tr>            <tr id="msg-run.js__547" class="hit">
                           <td class="line" data-tooltip>547</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            on: { &#x27;&#x27;: &#x27;stop&#x27; }</td>
+                          <td class="source">                { target: &#x27;outbound&#x27;, cond: &#x27;result_has_more_msgs&#x27; },</td>
                           
                         </tr>            <tr id="msg-run.js__548" class="hit">
                           <td class="line" data-tooltip>548</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          },</td>
+                          <td class="source">                { target: &#x27;pass&#x27; }</td>
                           
                         </tr>            <tr id="msg-run.js__549" class="hit">
                           <td class="line" data-tooltip>549</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">              ]</td>
                           
                         </tr>            <tr id="msg-run.js__550" class="hit">
                           <td class="line" data-tooltip>550</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          fail: {</td>
+                          <td class="source">            }</td>
                           
                         </tr>            <tr id="msg-run.js__551" class="hit">
                           <td class="line" data-tooltip>551</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            entry: XState.assign({ pass: false }),</td>
+                          <td class="source">          },</td>
                           
                         </tr>            <tr id="msg-run.js__552" class="hit">
                           <td class="line" data-tooltip>552</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            on: { &#x27;&#x27;: &#x27;stop&#x27; }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__553" class="hit">
                           <td class="line" data-tooltip>553</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          },</td>
+                          <td class="source">          pass: {</td>
                           
                         </tr>            <tr id="msg-run.js__554" class="hit">
                           <td class="line" data-tooltip>554</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            entry: XState.assign({ pass: true }),</td>
                           
                         </tr>            <tr id="msg-run.js__555" class="hit">
                           <td class="line" data-tooltip>555</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          stop: {</td>
+                          <td class="source">            on: { &#x27;&#x27;: &#x27;stop&#x27; }</td>
                           
                         </tr>            <tr id="msg-run.js__556" class="hit">
                           <td class="line" data-tooltip>556</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            entry: ctx &#x3D;&gt; {</td>
+                          <td class="source">          },</td>
                           
                         </tr>            <tr id="msg-run.js__557" class="hit">
                           <td class="line" data-tooltip>557</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              ctx.finish(ctx)</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__558" class="hit">
                           <td class="line" data-tooltip>558</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            },</td>
+                          <td class="source">          fail: {</td>
                           
                         </tr>            <tr id="msg-run.js__559" class="hit">
                           <td class="line" data-tooltip>559</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            type: &#x27;final&#x27;</td>
+                          <td class="source">            entry: XState.assign({ pass: false }),</td>
                           
                         </tr>            <tr id="msg-run.js__560" class="hit">
                           <td class="line" data-tooltip>560</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="source">            on: { &#x27;&#x27;: &#x27;stop&#x27; }</td>
                           
                         </tr>            <tr id="msg-run.js__561" class="hit">
                           <td class="line" data-tooltip>561</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source">          },</td>
                           
                         </tr>            <tr id="msg-run.js__562" class="hit">
                           <td class="line" data-tooltip>562</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      },</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__563" class="hit">
                           <td class="line" data-tooltip>563</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      config</td>
+                          <td class="source">          stop: {</td>
                           
                         </tr>            <tr id="msg-run.js__564" class="hit">
                           <td class="line" data-tooltip>564</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    )</td>
+                          <td class="source">            entry: ctx &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__565" class="hit">
                           <td class="line" data-tooltip>565</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">              ctx.finish(ctx)</td>
                           
                         </tr>            <tr id="msg-run.js__566" class="hit">
                           <td class="line" data-tooltip>566</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">    return machine</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">            },</td>
                           
                         </tr>            <tr id="msg-run.js__567" class="hit">
                           <td class="line" data-tooltip>567</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  },</td>
+                          <td class="source">            type: &#x27;final&#x27;</td>
                           
                         </tr>            <tr id="msg-run.js__568" class="hit">
                           <td class="line" data-tooltip>568</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">          }</td>
                           
                         </tr>            <tr id="msg-run.js__569" class="hit">
                           <td class="line" data-tooltip>569</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  make_scenario_interpreter: function(machine, ctx) {</td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="msg-run.js__570" class="hit">
                           <td class="line" data-tooltip>570</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    ctx.mark &#x3D; Math.random()</td>
+                          <td class="source">      },</td>
                           
                         </tr>            <tr id="msg-run.js__571" class="hit">
                           <td class="line" data-tooltip>571</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>9</td>
-                          <td class="source">    const machine_instance &#x3D; machine.withContext(ctx)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      config</td>
                           
                         </tr>            <tr id="msg-run.js__572" class="hit">
                           <td class="line" data-tooltip>572</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">    )</td>
                           
                         </tr>            <tr id="msg-run.js__573" class="hit">
                           <td class="line" data-tooltip>573</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>9</td>
-                          <td class="source">    const interpreter &#x3D; XState.interpret(machine_instance).onTransition(</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__574" class="hit">
                           <td class="line" data-tooltip>574</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      state &#x3D;&gt; {</td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">    return machine</td>
                           
                         </tr>            <tr id="msg-run.js__575" class="hit">
                           <td class="line" data-tooltip>575</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        /*</td>
+                          <td class="source">  },</td>
                           
                         </tr>            <tr id="msg-run.js__576" class="hit">
                           <td class="line" data-tooltip>576</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            console.log(intern.aligner([</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__577" class="hit">
                           <td class="line" data-tooltip>577</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              0, &#x27;TRANSITION&#x27;,</td>
+                          <td class="source">  make_scenario_interpreter: function(machine, ctx) {</td>
                           
                         </tr>            <tr id="msg-run.js__578" class="hit">
                           <td class="line" data-tooltip>578</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              12, state.value,</td>
+                          <td class="source">    ctx.mark &#x3D; Math.random()</td>
                           
                         </tr>            <tr id="msg-run.js__579" class="hit">
                           <td class="line" data-tooltip>579</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">              20, state.event.type,</td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">    const machine_instance &#x3D; machine.withContext(ctx)</td>
                           
                         </tr>            <tr id="msg-run.js__580" class="hit">
                           <td class="line" data-tooltip>580</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              8, state.context.test_spec.name,</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__581" class="hit">
                           <td class="line" data-tooltip>581</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">              0, state.context.msg,</td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">    const interpreter &#x3D; XState.interpret(machine_instance).onTransition(</td>
                           
                         </tr>            <tr id="msg-run.js__582" class="hit">
                           <td class="line" data-tooltip>582</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              0, state.context.res &amp;&amp; state.context.res.out,</td>
+                          <td class="source">      state &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="msg-run.js__583" class="hit">
                           <td class="line" data-tooltip>583</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              0, state.context.index</td>
+                          <td class="source">        /*</td>
                           
                         </tr>            <tr id="msg-run.js__584" class="hit">
                           <td class="line" data-tooltip>584</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            ]))</td>
+                          <td class="source">            console.log(intern.aligner([</td>
                           
                         </tr>            <tr id="msg-run.js__585" class="hit">
                           <td class="line" data-tooltip>585</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            */</td>
+                          <td class="source">              0, &#x27;TRANSITION&#x27;,</td>
                           
                         </tr>            <tr id="msg-run.js__586" class="hit">
                           <td class="line" data-tooltip>586</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">              12, state.value,</td>
                           
                         </tr>            <tr id="msg-run.js__587" class="hit">
                           <td class="line" data-tooltip>587</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    )</td>
+                          <td class="source">              20, state.event.type,</td>
                           
                         </tr>            <tr id="msg-run.js__588" class="hit">
                           <td class="line" data-tooltip>588</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">              8, state.context.test_spec.name,</td>
                           
                         </tr>            <tr id="msg-run.js__589" class="hit">
                           <td class="line" data-tooltip>589</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>9</td>
-                          <td class="source">    return interpreter</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">              0, state.context.msg,</td>
                           
                         </tr>            <tr id="msg-run.js__590" class="hit">
                           <td class="line" data-tooltip>590</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  },</td>
+                          <td class="source">              0, state.context.res &amp;&amp; state.context.res.out,</td>
                           
                         </tr>            <tr id="msg-run.js__591" class="hit">
                           <td class="line" data-tooltip>591</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">              0, state.context.index</td>
                           
                         </tr>            <tr id="msg-run.js__592" class="hit">
                           <td class="line" data-tooltip>592</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  make_clock: function(options) {</td>
+                          <td class="source">            ]))</td>
                           
                         </tr>            <tr id="msg-run.js__593" class="hit">
                           <td class="line" data-tooltip>593</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    var clock &#x3D; options.clock</td>
+                          <td class="source">            */</td>
                           
                         </tr>            <tr id="msg-run.js__594" class="hit">
                           <td class="line" data-tooltip>594</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      }</td>
                           
-                        </tr>            <tr id="msg-run.js__595" class="chunks">
+                        </tr>            <tr id="msg-run.js__595" class="hit">
                           <td class="line" data-tooltip>595</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>    if (</div><div class="miss false" data-tooltip>!options.clock</div><div>) {</div></td>
+                          <td class="source">    )</td>
                           
-                        </tr>            <tr id="msg-run.js__596" class="miss">
+                        </tr>            <tr id="msg-run.js__596" class="hit">
                           <td class="line" data-tooltip>596</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      clock &#x3D; {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__597" class="hit">
                           <td class="line" data-tooltip>597</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        setTimeout: setTimeout,</td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">    return interpreter</td>
                           
                         </tr>            <tr id="msg-run.js__598" class="hit">
                           <td class="line" data-tooltip>598</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        setInterval: setInterval,</td>
+                          <td class="source">  },</td>
                           
                         </tr>            <tr id="msg-run.js__599" class="hit">
                           <td class="line" data-tooltip>599</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        clearTimeout: clearTimeout,</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__600" class="hit">
                           <td class="line" data-tooltip>600</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        clearInterval: clearInterval</td>
+                          <td class="source">  make_clock: function(options) {</td>
                           
                         </tr>            <tr id="msg-run.js__601" class="hit">
                           <td class="line" data-tooltip>601</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">    var clock &#x3D; options.clock</td>
                           
                         </tr>            <tr id="msg-run.js__602" class="hit">
                           <td class="line" data-tooltip>602</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="msg-run.js__603" class="hit">
+                        </tr>            <tr id="msg-run.js__603" class="chunks">
                           <td class="line" data-tooltip>603</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>    if (</div><div class="miss false" data-tooltip>!options.clock</div><div>) {</div></td>
                           
-                        </tr>            <tr id="msg-run.js__604" class="hit">
+                        </tr>            <tr id="msg-run.js__604" class="miss">
                           <td class="line" data-tooltip>604</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">    return clock</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>      clock &#x3D; {</td>
                           
                         </tr>            <tr id="msg-run.js__605" class="hit">
                           <td class="line" data-tooltip>605</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source">        setTimeout: setTimeout,</td>
                           
                         </tr>            <tr id="msg-run.js__606" class="hit">
                           <td class="line" data-tooltip>606</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        setInterval: setInterval,</td>
                           
                         </tr>            <tr id="msg-run.js__607" class="hit">
                           <td class="line" data-tooltip>607</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  /*</td>
+                          <td class="source">        clearTimeout: clearTimeout,</td>
                           
                         </tr>            <tr id="msg-run.js__608" class="hit">
                           <td class="line" data-tooltip>608</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  aligner: function(line) {</td>
+                          <td class="source">        clearInterval: clearInterval</td>
                           
                         </tr>            <tr id="msg-run.js__609" class="hit">
                           <td class="line" data-tooltip>609</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    var out &#x3D; []</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="msg-run.js__610" class="hit">
                           <td class="line" data-tooltip>610</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    for (var i &#x3D; 0; i &lt; line.length; i +&#x3D; 2) {</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="msg-run.js__611" class="hit">
                           <td class="line" data-tooltip>611</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      var len &#x3D; line[i]</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__612" class="hit">
                           <td class="line" data-tooltip>612</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      var str &#x3D; line[i + 1]</td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">    return clock</td>
                           
                         </tr>            <tr id="msg-run.js__613" class="hit">
                           <td class="line" data-tooltip>613</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">  }</td>
                           
                         </tr>            <tr id="msg-run.js__614" class="hit">
                           <td class="line" data-tooltip>614</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      if (&#x27;string&#x27; !&#x3D;&#x3D; typeof str) {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__615" class="hit">
                           <td class="line" data-tooltip>615</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        str &#x3D; Util.inspect(str, { breakLength: Infinity })</td>
+                          <td class="source">  /*</td>
                           
                         </tr>            <tr id="msg-run.js__616" class="hit">
                           <td class="line" data-tooltip>616</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">  aligner: function(line) {</td>
                           
                         </tr>            <tr id="msg-run.js__617" class="hit">
                           <td class="line" data-tooltip>617</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">    var out &#x3D; []</td>
                           
                         </tr>            <tr id="msg-run.js__618" class="hit">
                           <td class="line" data-tooltip>618</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      if (0 &#x3D;&#x3D; len) {</td>
+                          <td class="source">    for (var i &#x3D; 0; i &lt; line.length; i +&#x3D; 2) {</td>
                           
                         </tr>            <tr id="msg-run.js__619" class="hit">
                           <td class="line" data-tooltip>619</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        len &#x3D; str.length + 1</td>
+                          <td class="source">      var len &#x3D; line[i]</td>
                           
                         </tr>            <tr id="msg-run.js__620" class="hit">
                           <td class="line" data-tooltip>620</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      var str &#x3D; line[i + 1]</td>
                           
                         </tr>            <tr id="msg-run.js__621" class="hit">
                           <td class="line" data-tooltip>621</td>
@@ -4371,40 +4371,88 @@
                           <td class="line" data-tooltip>622</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      out.push(str.padEnd(len, &#x27; &#x27;))</td>
+                          <td class="source">      if (&#x27;string&#x27; !&#x3D;&#x3D; typeof str) {</td>
                           
                         </tr>            <tr id="msg-run.js__623" class="hit">
                           <td class="line" data-tooltip>623</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source">        str &#x3D; Util.inspect(str, { breakLength: Infinity })</td>
                           
                         </tr>            <tr id="msg-run.js__624" class="hit">
                           <td class="line" data-tooltip>624</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    return out.join(&#x27;&#x27;)</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="msg-run.js__625" class="hit">
                           <td class="line" data-tooltip>625</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="msg-run.js__626" class="hit">
                           <td class="line" data-tooltip>626</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  */</td>
+                          <td class="source">      if (0 &#x3D;&#x3D; len) {</td>
                           
                         </tr>            <tr id="msg-run.js__627" class="hit">
                           <td class="line" data-tooltip>627</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">})</td>
+                          <td class="source">        len &#x3D; str.length + 1</td>
                           
                         </tr>            <tr id="msg-run.js__628" class="hit">
                           <td class="line" data-tooltip>628</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }</td>
+                          
+                        </tr>            <tr id="msg-run.js__629" class="hit">
+                          <td class="line" data-tooltip>629</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="msg-run.js__630" class="hit">
+                          <td class="line" data-tooltip>630</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      out.push(str.padEnd(len, &#x27; &#x27;))</td>
+                          
+                        </tr>            <tr id="msg-run.js__631" class="hit">
+                          <td class="line" data-tooltip>631</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    }</td>
+                          
+                        </tr>            <tr id="msg-run.js__632" class="hit">
+                          <td class="line" data-tooltip>632</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    return out.join(&#x27;&#x27;)</td>
+                          
+                        </tr>            <tr id="msg-run.js__633" class="hit">
+                          <td class="line" data-tooltip>633</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="msg-run.js__634" class="hit">
+                          <td class="line" data-tooltip>634</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  */</td>
+                          
+                        </tr>            <tr id="msg-run.js__635" class="hit">
+                          <td class="line" data-tooltip>635</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">})</td>
+                          
+                        </tr>            <tr id="msg-run.js__636" class="hit">
+                          <td class="line" data-tooltip>636</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>

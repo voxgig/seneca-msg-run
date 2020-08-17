@@ -23,7 +23,7 @@ lab.test('happy', { timeout: 5555 }, async () => {
     tests: [
       {
         name: 't0',
-        fix: { b: 1 },
+        // fix: { b: 1 },
         scenario: [{ msg: ['a:1', { x: 2 }], out: { x: 2 } }]
       },
       {
@@ -278,7 +278,7 @@ lab.test('match-error', { timeout: 3333 }, async () => {
   expect(si).exists()
 
   si.message('a:1', async function(m) {
-    if (3 === m.x) this.fail('bad')
+    if (3 === m.x) this.fail('bad',{})
     return { x: m.x }
   })
 
